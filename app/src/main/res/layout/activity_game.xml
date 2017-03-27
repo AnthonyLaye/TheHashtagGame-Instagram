@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_game"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.antho.thetaggame.GameActivity">
+
+
+<!--
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:text="@string/hiscore"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:layout_alignBaseline="@+id/button4"
+        android:layout_alignBottom="@+id/button4"
+        android:layout_toRightOf="@+id/buttonq2"
+        android:layout_toEndOf="@+id/buttonq2"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp" />
+-->
+
+    <Button
+        android:id="@+id/buttonq1"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:textColor= "@color/yellow"
+        android:layout_alignTop="@+id/imageView3"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/button_shape"
+        android:onClick="buttonClicked"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/buttonq2"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:textSize="15sp"
+        android:textColor= "@color/yellow"
+        android:textStyle="bold"
+        android:layout_alignTop="@+id/imageView2"
+        android:background="@drawable/button_shape"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:onClick="buttonClicked" />
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView"
+        android:layout_toEndOf="@+id/ViewB2"
+        android:layout_toRightOf="@+id/ViewB2"
+        android:alpha="0.8"
+        android:contentDescription="@string/img1"
+        android:scaleType="fitXY"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_below="@+id/switch1"
+        android:alpha="0.8"
+        android:contentDescription="@string/img2"
+        android:scaleType="fitXY"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/app_ID" />
+
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:adjustViewBounds="false"
+        android:alpha="0.80"
+        android:contentDescription="@string/scoreoval"
+        android:cropToPadding="false"
+        android:src="@drawable/scoreoval" />
+
+
+
+    <TextView
+        android:text="@string/score"
+        android:textStyle="bold"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_below="@+id/buttonq1"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/ViewB1"
+        android:textColor= "@color/yellow"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ViewB2"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/buttonq2"
+        android:layout_above="@+id/adView"
+        android:textColor= "@color/yellow"
+        android:layout_marginTop="20dp" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/volume"
+        android:visibility="visible" />
+
+    <ImageButton
+        android:id="@+id/button4"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/goBack"
+        android:onClick="onMenu"
+        android:background="@drawable/backbutton" />
+
+</RelativeLayout>
+
