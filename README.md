@@ -1,2 +1,0 @@
-# TheTagGame
-TheTagGame, android app.
