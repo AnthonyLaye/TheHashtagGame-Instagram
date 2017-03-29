@@ -98,13 +98,13 @@ public class GameActivity extends AppCompatActivity {
 
         SharedPreferences prefs = this.getSharedPreferences("HighScore", Context.MODE_PRIVATE);
 
-        int currentHighScore = prefs.getInt("HighScore", highScore);
-        if(score > currentHighScore)
-        {
-            SharedPreferences.Editor edit = prefs.edit();
-            edit.putInt("HighScore", highScore);
-            edit.apply();
-        }
+        //int currentHighScore = prefs.getInt("HighScore", highScore);
+        //if(score > currentHighScore)
+        //{
+          //  SharedPreferences.Editor edit = prefs.edit();
+            //edit.putInt("HighScore", highScore);
+            //edit.apply();
+        //}
 
         button1 = (Button) findViewById(R.id.buttonq1);
         button2 = (Button) findViewById(R.id.buttonq2);
@@ -213,8 +213,6 @@ public class GameActivity extends AppCompatActivity {
 
     public void isCorrect(String tagID1, String tagID2, int indexTag1, int indexTag2, String answer){
 
-        //Log.v(TAG, "Initializing sounds...");
-
         if(mySwitch.isChecked()) {
             final MediaPlayer mp = MediaPlayer.create(this, R.raw.ding);
             mp.start();
@@ -236,8 +234,10 @@ public class GameActivity extends AppCompatActivity {
                 restartIntent();
             }
         }, 1900);
+
         button1.setClickable(false);
         button2.setClickable(false);
+        button.setClickable(false);
     }
 
     public void restartIntent(){
@@ -278,6 +278,7 @@ public class GameActivity extends AppCompatActivity {
 
         button1.setClickable(false);
         button2.setClickable(false);
+        button.setClickable(false);
 
     }
 
