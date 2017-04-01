@@ -10,6 +10,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.ToneGenerator;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
@@ -34,38 +35,29 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.antho.thetaggame.R.drawable.button_shape;
+
 
 public class GameActivity extends AppCompatActivity {
 
     public static int score = 0;
-    public static int highScore = 0;
     public static int tagQuantity = 319;
     public static int[] quantity = new int[tagQuantity];
     public static String[] hashTags = new String[tagQuantity];
     public static String[] hashPics = new String[tagQuantity];
 
-
-    Button button1,button2;
-    ImageButton button;
-
-    TextView scoreKeep, ViewB1, ViewB2, highscore;
-
-    Switch mySwitch;
+    private Button button1, button2;
+    private ImageButton button;
+    private TextView scoreKeep, ViewB1, ViewB2;
+    private Switch mySwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        //ActionBar actionBar = getActionBar();
-        //actionBar.setDisplayHomeAsUpEnabled(true);
-        //if(getActionBar() != null){
-          //  getActionBar().setDisplayHomeAsUpEnabled(true);
-       // }
-
+        score = 0;
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544/6300978111");
-
-        button = (ImageButton) findViewById(R.id.button4);
 
         /*  ONLY FOR FINISHED APP
         AdView mAdView = (AdView) findViewById(R.id.adView);
@@ -82,45 +74,12 @@ public class GameActivity extends AppCompatActivity {
 
         mAdView.loadAd(request);
 
-        mySwitch = (Switch) findViewById(R.id.switch1);
-
-        SharedPreferences prefs2 = this.getSharedPreferences("Switch", Context.MODE_PRIVATE);
-
-        boolean switched = prefs2.getBoolean("Switch", mySwitch.isChecked());
-
-        mySwitch.setChecked(switched);
-
-        ImageView myImageView2 = (ImageView) findViewById(R.id.imageView2);
-        ImageView myImageView1 = (ImageView) findViewById(R.id.imageView3);
-
-        myImageView1.setImageResource(R.drawable.hashtag_1);
-        myImageView2.setImageResource(R.drawable.hashtag_0);
-
-        SharedPreferences prefs = this.getSharedPreferences("HighScore", Context.MODE_PRIVATE);
-
-        //int currentHighScore = prefs.getInt("HighScore", highScore);
-        //if(score > currentHighScore)
-        //{
-          //  SharedPreferences.Editor edit = prefs.edit();
-            //edit.putInt("HighScore", highScore);
-            //edit.apply();
-        //}
-
-        button1 = (Button) findViewById(R.id.buttonq1);
-        button2 = (Button) findViewById(R.id.buttonq2);
-        //highscore = (TextView) findViewById(R.id.textView3);
-        //highscore.setText("Highscore: " +  highScore);
-        setUp();
+        readFiles();
     }
 
-    public void setUp() {
+    public void readFiles() {
 
         InputStream input;
-        int tagID1, tagID2;
-
-        scoreKeep = (TextView) findViewById(R.id.textView);
-        ImageView myImageView2 = (ImageView) findViewById(R.id.imageView2);
-        ImageView myImageView1 = (ImageView) findViewById(R.id.imageView3);
 
         try {
             input = getAssets().open("HashTags.txt");
@@ -135,28 +94,46 @@ public class GameActivity extends AppCompatActivity {
 
             reader.close();
 
-            myArray = out.toString().split(" ");    //Break up that String Builder into an array
-                                                    //each space indicates a new index to be made
+            myArray = out.toString().split(" ");
             hashTags[0] = myArray[0];
             quantity[0] = Integer.parseInt(myArray[1]);
+            hashPics[0] = "hashtag_0";
 
             for (int i = 1; i < tagQuantity; i++) {
                 hashTags[i] = myArray[2 * i];   //Hashtags are the even numbers
                 quantity[i] = Integer.parseInt(myArray[2 * i + 1]); //Quantities are the odd numbers
-            }
-
-            for(int i = 0; i < tagQuantity; i++){
                 hashPics[i] = "hashtag_" + i;
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+        reLoad();
+    }
+
+    public void reLoad() {
+
+        scoreKeep = (TextView) findViewById(R.id.textView);
+        mySwitch = (Switch) findViewById(R.id.switch1);
+        button1 = (Button) findViewById(R.id.buttonq1);
+        button2 = (Button) findViewById(R.id.buttonq2);
+        button = (ImageButton) findViewById(R.id.button4);
+
+        button1.setBackgroundResource(R.drawable.button_shape);
+        button2.setBackgroundResource(R.drawable.button_shape);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        Boolean isSwitch = prefs.getBoolean("Switch", mySwitch.isChecked());
+        mySwitch.setChecked(isSwitch);
+
+        int tagID1, tagID2;
+        ImageView myImageView2 = (ImageView) findViewById(R.id.imageView2);
+        ImageView myImageView1 = (ImageView) findViewById(R.id.imageView3);
 
         tagID1 = (int) (Math.random() * tagQuantity);
         tagID2 = (int) (Math.random() * tagQuantity);
 
-        if(tagID1 == tagID2)
+        if (tagID1 == tagID2)
             tagID2 = (int) (Math.random() * tagQuantity); //Ensure Hashtags aren't the same...hopefully
 
         button1.setText(hashTags[tagID1]);
@@ -166,7 +143,13 @@ public class GameActivity extends AppCompatActivity {
         myImageView2.setImageResource(getImageId(this, hashPics[tagID2]));
 
         scoreKeep.setText("SCORE: " + score);
+
+        button1.setClickable(true);
+        button2.setClickable(true);
+        button.setClickable(true);
     }
+
+
 
     public static int getImageId(Context context, String imageName) {
         return context.getResources().getIdentifier("drawable/" + imageName, null, context.getPackageName());
@@ -177,6 +160,10 @@ public class GameActivity extends AppCompatActivity {
         String answer = (String) ((Button) v).getText();   //Get value of text on button pressed
         calculateScore(answer);
 
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("Switch", mySwitch.isChecked());
+        editor.apply();
     }
 
     public void calculateScore(String answer) {
@@ -191,7 +178,7 @@ public class GameActivity extends AppCompatActivity {
         ViewB2 = (TextView) findViewById(R.id.ViewB2);  //To display number of times b2 used
         scoreKeep = (TextView) findViewById(R.id.textView); //To write current score
 
-        for (int i=0;i<hashTags.length;i++) {   //Get the ID numbers from the strings by looping through hashTags array
+        for (int i = 0; i < hashTags.length; i++) {   //Get the ID numbers from the strings by looping through hashTags array
             if (hashTags[i].equals(tagText1)) {
                 indexTag1 = i;
             }
@@ -207,8 +194,7 @@ public class GameActivity extends AppCompatActivity {
             isCorrect(tagText1, tagText2, indexTag1, indexTag2, answer);
         else if (quantity[answerID] < quantity[indexTag1] || quantity[answerID] < quantity[indexTag2])
             isFalse(tagText1, tagText2, indexTag1, indexTag2, answer);
-
-    }//end calculateScore method
+    }
 
 
     public void isCorrect(String tagID1, String tagID2, int indexTag1, int indexTag2, String answer){
@@ -220,10 +206,8 @@ public class GameActivity extends AppCompatActivity {
 
         if(button1.getText().equals(answer))
             button1.setBackgroundColor(Color.GREEN);
-
         else if(button2.getText().equals(answer))
             button2.setBackgroundColor(Color.GREEN);
-
 
         score++;
         printTotal(tagID1, tagID2, indexTag1, indexTag2);
@@ -233,7 +217,7 @@ public class GameActivity extends AppCompatActivity {
             public void run() {
                 restartIntent();
             }
-        }, 1900);
+        }, 2200);
 
         button1.setClickable(false);
         button2.setClickable(false);
@@ -241,22 +225,23 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void restartIntent(){
+        reLoad();
 
-        finish();
-        SharedPreferences prefs2 = this.getSharedPreferences("Switch", Context.MODE_PRIVATE);
-        SharedPreferences.Editor edit = prefs2.edit();
-        edit.putBoolean("Switch", mySwitch.isChecked());
-        edit.apply();
-        Intent myIntent = new Intent(this, GameActivity.class);
-        myIntent.putExtra("Switch", mySwitch.isChecked());
-        startActivity(myIntent);
+        //finish();
+        //SharedPreferences prefs2 = this.getSharedPreferences("Switch", Context.MODE_PRIVATE);
+        //SharedPreferences.Editor edit = prefs2.edit();
+        //edit.putBoolean("Switch", mySwitch.isChecked());
+        //edit.apply();
+        //Intent myIntent = new Intent(this, GameActivity.class);
+        //myIntent.putExtra("Switch", mySwitch.isChecked());
+        //startActivity(myIntent);
     }
 
     public void isFalse(String tagID1, String tagID2, int indexTag1, int indexTag2, String answer){
 
         if(button1.getText().equals(answer))
             button1.setBackgroundColor(Color.RED);
-        if(button2.getText().equals(answer))
+        else if(button2.getText().equals(answer))
             button2.setBackgroundColor(Color.RED);
 
         if(mySwitch.isChecked()) {
@@ -274,7 +259,7 @@ public class GameActivity extends AppCompatActivity {
             public void run() {
                 startLoseIntent(scoreHolder);
             }
-        }, 1900);
+        }, 2200);
 
         button1.setClickable(false);
         button2.setClickable(false);
@@ -340,8 +325,6 @@ public class GameActivity extends AppCompatActivity {
     public void onMenu(View v){
 
         Intent myIntent = new Intent(this, TitleScreen.class);
-        score = 0;
-        myIntent.putExtra("Score", score);
         startActivity(myIntent);
     }
 
