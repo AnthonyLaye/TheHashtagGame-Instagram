@@ -30,29 +30,29 @@
 
     <Button
         android:id="@+id/buttonq1"
-        android:layout_width="200dp"
-        android:layout_height="70dp"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:textColor= "@color/yellow"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
         android:layout_alignTop="@+id/imageView3"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
         android:background="@drawable/button_shape"
         android:onClick="buttonClicked"
-        android:layout_centerHorizontal="true" />
+        android:textColor="@color/yellow"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/buttonq2"
-        android:layout_width="200dp"
-        android:layout_height="70dp"
-        android:textSize="15sp"
-        android:textColor= "@color/yellow"
-        android:textStyle="bold"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
         android:layout_alignTop="@+id/imageView2"
-        android:background="@drawable/button_shape"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
-        android:onClick="buttonClicked" />
+        android:background="@drawable/button_shape"
+        android:onClick="buttonClicked"
+        android:textColor="@color/yellow"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
 
     <ImageView
@@ -78,7 +78,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_below="@+id/switch1"
+        android:layout_below="@+id/volToggle"
         android:alpha="0.8"
         android:contentDescription="@string/img2"
         android:scaleType="fitXY"
@@ -105,7 +105,7 @@
         android:alpha="0.80"
         android:contentDescription="@string/scoreoval"
         android:cropToPadding="false"
-        android:src="@drawable/scoreoval" />
+        android:src="@drawable/orangeoval" />
 
 
 
@@ -126,6 +126,7 @@
         android:layout_below="@+id/buttonq1"
         android:textSize="20sp"
         android:gravity="center"
+        android:alpha="1"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:id="@+id/ViewB1"
@@ -137,13 +138,14 @@
         android:id="@+id/ViewB2"
         android:textStyle="bold"
         android:gravity="center"
+        android:alpha="1"
         android:textSize="20sp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/buttonq2"
-        android:layout_above="@+id/adView"
         android:textColor= "@color/yellow"
         android:layout_marginTop="20dp" />
 
+    <!--
     <Switch
         android:id="@+id/switch1"
         android:layout_width="wrap_content"
@@ -151,19 +153,31 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:textColor="#FFA500"
         android:text="@string/volume"
         android:visibility="visible" />
-
+-->
     <ImageButton
         android:id="@+id/button4"
-        android:layout_width="70dp"
+        android:layout_width="45dp"
         android:layout_height="40dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:contentDescription="@string/goBack"
         android:onClick="onMenu"
-        android:background="@drawable/backbutton" />
+        android:background="@drawable/home" />
+
+    <ImageButton
+        android:id="@+id/volToggle"
+        android:layout_width="45dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/volume"
+        android:onClick="volToggle"
+        android:background="@drawable/volon" />
 
 </RelativeLayout>
 

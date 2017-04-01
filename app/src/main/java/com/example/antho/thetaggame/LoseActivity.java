@@ -21,13 +21,12 @@ public class LoseActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            score = extras.getInt("Score");
+           score = extras.getInt("Score");
         }
 
         SharedPreferences prefs = this.getSharedPreferences("HighScore", Context.MODE_PRIVATE);
         int currentHighScore = prefs.getInt("HighScore", score);
-        if(score > currentHighScore)
-        {
+        if(score > currentHighScore) {
             SharedPreferences.Editor edit = prefs.edit();
             edit.putInt("HighScore", score);
             edit.apply();

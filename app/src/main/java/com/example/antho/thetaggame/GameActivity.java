@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.antho.thetaggame.R.drawable.button_shape;
+import static com.example.antho.thetaggame.R.drawable.greenbutton_shape;
 
 
 public class GameActivity extends AppCompatActivity {
@@ -45,9 +46,10 @@ public class GameActivity extends AppCompatActivity {
     public static int[] quantity = new int[tagQuantity];
     public static String[] hashTags = new String[tagQuantity];
     public static String[] hashPics = new String[tagQuantity];
+    public boolean isToggled = false;
 
     private Button button1, button2;
-    private ImageButton button;
+    private ImageButton button, volToggle;
     private TextView scoreKeep, ViewB1, ViewB2;
     private Switch mySwitch;
 
@@ -73,6 +75,16 @@ public class GameActivity extends AppCompatActivity {
 
 
         mAdView.loadAd(request);
+
+        volToggle = (ImageButton) findViewById(R.id.volToggle);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        isToggled = prefs.getBoolean("Switch", isToggled);
+
+        if(!isToggled)
+            volToggle.setBackgroundResource(R.drawable.volon);
+        else
+            volToggle.setBackgroundResource(R.drawable.voloff);
 
         readFiles();
     }
@@ -113,18 +125,20 @@ public class GameActivity extends AppCompatActivity {
 
     public void reLoad() {
 
-        scoreKeep = (TextView) findViewById(R.id.textView);
-        mySwitch = (Switch) findViewById(R.id.switch1);
+        //mySwitch = (Switch) findViewById(R.id.switch1);
         button1 = (Button) findViewById(R.id.buttonq1);
         button2 = (Button) findViewById(R.id.buttonq2);
         button = (ImageButton) findViewById(R.id.button4);
+        ViewB1 = (TextView) findViewById(R.id.ViewB1);  //To display number of times b1 used
+        ViewB2 = (TextView) findViewById(R.id.ViewB2);
+        scoreKeep = (TextView) findViewById(R.id.textView);
 
         button1.setBackgroundResource(R.drawable.button_shape);
         button2.setBackgroundResource(R.drawable.button_shape);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        Boolean isSwitch = prefs.getBoolean("Switch", mySwitch.isChecked());
-        mySwitch.setChecked(isSwitch);
+
+        ViewB1.setText("");
+        ViewB2.setText("");
 
         int tagID1, tagID2;
         ImageView myImageView2 = (ImageView) findViewById(R.id.imageView2);
@@ -147,6 +161,8 @@ public class GameActivity extends AppCompatActivity {
         button1.setClickable(true);
         button2.setClickable(true);
         button.setClickable(true);
+        volToggle.setClickable(true);
+        //mySwitch.setClickable(true);
     }
 
 
@@ -162,7 +178,7 @@ public class GameActivity extends AppCompatActivity {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean("Switch", mySwitch.isChecked());
+        editor.putBoolean("Switch", isToggled);
         editor.apply();
     }
 
@@ -171,12 +187,13 @@ public class GameActivity extends AppCompatActivity {
         int answerID = 0, indexTag1 = 0, indexTag2 = 0;
         String tagText1, tagText2;
 
+        button1.setClickable(false);
+        button2.setClickable(false);
+        button.setClickable(false);
+        volToggle.setClickable(false);
+
         tagText1 = (String) button1.getText();    //Button1 text
         tagText2 = (String) button2.getText();    //Button2 text
-
-        ViewB1 = (TextView) findViewById(R.id.ViewB1);  //To display number of times b1 used
-        ViewB2 = (TextView) findViewById(R.id.ViewB2);  //To display number of times b2 used
-        scoreKeep = (TextView) findViewById(R.id.textView); //To write current score
 
         for (int i = 0; i < hashTags.length; i++) {   //Get the ID numbers from the strings by looping through hashTags array
             if (hashTags[i].equals(tagText1)) {
@@ -199,15 +216,15 @@ public class GameActivity extends AppCompatActivity {
 
     public void isCorrect(String tagID1, String tagID2, int indexTag1, int indexTag2, String answer){
 
-        if(mySwitch.isChecked()) {
+        if(!isToggled) {
             final MediaPlayer mp = MediaPlayer.create(this, R.raw.ding);
             mp.start();
         }
 
         if(button1.getText().equals(answer))
-            button1.setBackgroundColor(Color.GREEN);
+            button1.setBackgroundResource(R.drawable.greenbutton_shape);
         else if(button2.getText().equals(answer))
-            button2.setBackgroundColor(Color.GREEN);
+            button2.setBackgroundResource(R.drawable.greenbutton_shape);
 
         score++;
         printTotal(tagID1, tagID2, indexTag1, indexTag2);
@@ -215,39 +232,23 @@ public class GameActivity extends AppCompatActivity {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                restartIntent();
+                reLoad();
             }
-        }, 2200);
+        }, 2600);
 
-        button1.setClickable(false);
-        button2.setClickable(false);
-        button.setClickable(false);
-    }
-
-    public void restartIntent(){
-        reLoad();
-
-        //finish();
-        //SharedPreferences prefs2 = this.getSharedPreferences("Switch", Context.MODE_PRIVATE);
-        //SharedPreferences.Editor edit = prefs2.edit();
-        //edit.putBoolean("Switch", mySwitch.isChecked());
-        //edit.apply();
-        //Intent myIntent = new Intent(this, GameActivity.class);
-        //myIntent.putExtra("Switch", mySwitch.isChecked());
-        //startActivity(myIntent);
     }
 
     public void isFalse(String tagID1, String tagID2, int indexTag1, int indexTag2, String answer){
 
-        if(button1.getText().equals(answer))
-            button1.setBackgroundColor(Color.RED);
-        else if(button2.getText().equals(answer))
-            button2.setBackgroundColor(Color.RED);
-
-        if(mySwitch.isChecked()) {
+        if(!isToggled) {
             final MediaPlayer mp = MediaPlayer.create(this, R.raw.wrongok);
             mp.start();
         }
+
+        if(button1.getText().equals(answer))
+            button1.setBackgroundResource(R.drawable.redbutton_shape);
+        else if(button2.getText().equals(answer))
+            button2.setBackgroundResource(R.drawable.redbutton_shape);
 
         final int scoreHolder = score;
         score = 0;
@@ -259,12 +260,7 @@ public class GameActivity extends AppCompatActivity {
             public void run() {
                 startLoseIntent(scoreHolder);
             }
-        }, 2200);
-
-        button1.setClickable(false);
-        button2.setClickable(false);
-        button.setClickable(false);
-
+        }, 2600);
     }
 
     public void startLoseIntent(int scoreHolder){
@@ -327,6 +323,17 @@ public class GameActivity extends AppCompatActivity {
         Intent myIntent = new Intent(this, TitleScreen.class);
         startActivity(myIntent);
     }
+
+    public void volToggle(View v){
+
+        isToggled = !isToggled;
+
+        if(!isToggled)
+            volToggle.setBackgroundResource(R.drawable.volon);
+        else
+            volToggle.setBackgroundResource(R.drawable.voloff);
+    }
+
 
 }
 

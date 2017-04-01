@@ -19,7 +19,7 @@ public class TitleScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_title_screen);
 
-        ImageView tagGame = (ImageView) findViewById(R.id.imageView);
+
 
         highScore = (TextView) findViewById(R.id.highScore);
         SharedPreferences prefs = this.getSharedPreferences("HighScore", Context.MODE_PRIVATE);
