@@ -51,7 +51,7 @@ public class GameActivity extends AppCompatActivity {
     private Button button1, button2;
     private ImageButton button, volToggle;
     private TextView scoreKeep, ViewB1, ViewB2;
-    private Switch mySwitch;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

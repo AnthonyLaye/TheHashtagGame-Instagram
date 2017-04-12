@@ -25,7 +25,7 @@ public class LoseActivity extends AppCompatActivity {
         }
 
         SharedPreferences prefs = this.getSharedPreferences("HighScore", Context.MODE_PRIVATE);
-        int currentHighScore = prefs.getInt("HighScore", score);
+        int currentHighScore = prefs.getInt("HighScore", 0);
         if(score > currentHighScore) {
             SharedPreferences.Editor edit = prefs.edit();
             edit.putInt("HighScore", score);

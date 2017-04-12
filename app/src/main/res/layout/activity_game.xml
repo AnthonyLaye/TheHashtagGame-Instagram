@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/activity_game"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.antho.thetaggame.GameActivity">
+    tools:context=".GameActivity">
 
 
 <!--
@@ -30,11 +29,11 @@
 
     <Button
         android:id="@+id/buttonq1"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imageView3"
+        app:layout_heightPercent="8%"
+        app:layout_widthPercent="95%"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
+        android:layout_alignTop="@+id/imageView3"
         android:background="@drawable/button_shape"
         android:onClick="buttonClicked"
         android:textColor="@color/yellow"
@@ -43,8 +42,8 @@
 
     <Button
         android:id="@+id/buttonq2"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
+        app:layout_heightPercent="8%"
+        app:layout_widthPercent="95%"
         android:layout_alignTop="@+id/imageView2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
@@ -58,7 +57,6 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -66,6 +64,7 @@
         android:layout_toEndOf="@+id/ViewB2"
         android:layout_toRightOf="@+id/ViewB2"
         android:alpha="0.8"
+        app:layout_heightPercent="20%"
         android:contentDescription="@string/img1"
         android:scaleType="fitXY"
         app:srcCompat="@mipmap/ic_launcher" />
@@ -73,21 +72,20 @@
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_below="@+id/volToggle"
+
         android:alpha="0.8"
         android:contentDescription="@string/img2"
         android:scaleType="fitXY"
+
+        app:layout_heightPercent="45%"
+        app:layout_widthPercent="100%"
         app:srcCompat="@mipmap/ic_launcher" />
+
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="100%"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         ads:adSize="BANNER"
@@ -96,8 +94,8 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        app:layout_heightPercent="12%"
+        app:layout_widthPercent="68%"
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
         android:layout_centerVertical="true"
@@ -106,8 +104,6 @@
         android:contentDescription="@string/scoreoval"
         android:cropToPadding="false"
         android:src="@drawable/orangeoval" />
-
-
 
     <TextView
         android:text="@string/score"
@@ -159,8 +155,8 @@
 -->
     <ImageButton
         android:id="@+id/button4"
-        android:layout_width="45dp"
-        android:layout_height="40dp"
+        app:layout_heightPercent="5%"
+        app:layout_widthPercent="12%"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -170,8 +166,8 @@
 
     <ImageButton
         android:id="@+id/volToggle"
-        android:layout_width="45dp"
-        android:layout_height="40dp"
+        app:layout_heightPercent="5%"
+        app:layout_widthPercent="10%"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
@@ -179,5 +175,5 @@
         android:onClick="volToggle"
         android:background="@drawable/volon" />
 
-</RelativeLayout>
+</android.support.percent.PercentRelativeLayout>
 

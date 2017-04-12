@@ -1,34 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_lose"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.antho.thetaggame.LoseActivity">
+    tools:context=".LoseActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        app:layout_heightPercent="4%"
+        app:layout_widthPercent="40%"
+
+
+        android:id="@+id/ScotreCtr"
+        android:layout_above="@+id/buttonHome"
+        android:textAlignment="center"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/youLose"
-        android:layout_above="@+id/button2"
-        android:layout_marginTop="44dp"
-        android:id="@+id/ScotreCtr" />
+        android:layout_marginBottom="15dp" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        app:layout_heightPercent="13%"
+        app:layout_widthPercent="53%"
         android:background="@drawable/play_button"
         android:onClick="playAgain"
         android:text="@string/playagain"
         android:textSize="25sp"
-        android:layout_marginBottom="49dp"
-        android:layout_above="@+id/buttonHome"
+        android:layout_marginBottom="17dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
     <!--
@@ -46,19 +50,19 @@
 -->
     <ImageButton
         android:id="@+id/buttonHome"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        app:layout_heightPercent="8%"
+        app:layout_widthPercent="13%"
         android:background="@drawable/home"
         android:contentDescription="@string/menu"
         android:onClick="mainMenu"
-        android:layout_marginBottom="15dp"
-        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="12dp"
+        android:layout_above="@+id/button2"
         android:layout_centerHorizontal="true" />
 
     <ImageButton
         android:id="@+id/youLose"
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
+        app:layout_heightPercent="60%"
+        app:layout_widthPercent="100%"
         android:background="@drawable/youlose"
         android:contentDescription="@string/lose"
         android:onClick="mainMenu"
@@ -68,4 +72,4 @@
 
 
 
-</RelativeLayout>
+</android.support.percent.PercentRelativeLayout>
