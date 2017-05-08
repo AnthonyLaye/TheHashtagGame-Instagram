@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".GameActivity">
+    tools:context="org.tektuna.antho.thetaggame.GameActivity">
 
 
 <!--
@@ -156,7 +156,7 @@
     <ImageButton
         android:id="@+id/button4"
         app:layout_heightPercent="5%"
-        app:layout_widthPercent="12%"
+        app:layout_widthPercent="9%"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"

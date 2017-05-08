@@ -1,4 +1,4 @@
-package com.example.antho.thetaggame;
+package org.tektuna.antho.thetaggame;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

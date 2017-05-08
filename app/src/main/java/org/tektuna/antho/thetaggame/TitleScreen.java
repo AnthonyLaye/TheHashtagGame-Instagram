@@ -1,4 +1,4 @@
-package com.example.antho.thetaggame;
+package org.tektuna.antho.thetaggame;
 
 import android.content.Context;
 import android.content.Intent;
@@ -34,7 +34,8 @@ public class TitleScreen extends AppCompatActivity {
         int score = 0;
 
         Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra("HighScore", highScore.getText());
+        //intent.putExtra("HighScore", highScore.getText());
         startActivity(intent);
+        finish();
     }
 }

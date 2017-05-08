@@ -1,4 +1,4 @@
-package com.example.antho.thetaggame;
+package org.tektuna.antho.thetaggame;
 
 import android.content.Context;
 import android.content.Intent;
@@ -40,9 +40,11 @@ public class LoseActivity extends AppCompatActivity {
     public void playAgain(View v){
         Intent myIntent = new Intent(this, GameActivity.class);
         startActivity(myIntent);
+        finish();
     }
     public void mainMenu(View v){
         Intent myIntent = new Intent(this, TitleScreen.class);
         startActivity(myIntent);
+        finish();
     }
 }

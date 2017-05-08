@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:890890783014:android:fc77e0f39c41039d",
         "android_client_info": {
-          "package_name": "com.example.antho.thetaggame"
+          "package_name": "org.tektuna.antho.thetaggame"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "890890783014-ta28hacu4up1grel1cmomcq13399m812.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.antho.thetaggame",
+            "package_name": "org.tektuna.antho.thetaggame",
             "certificate_hash": "ab609c7e1f387d7e34a58019741fabb8d7aa630a"
           }
         },

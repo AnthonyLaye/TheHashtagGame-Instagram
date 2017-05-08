@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.antho.thetaggame">
+    package="org.tektuna.antho.thetaggame">
 
     <uses-permission android:name="READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
+        android:debuggable="false"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme ="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".TitleScreen"
+        <activity android:name="org.tektuna.antho.thetaggame.TitleScreen"
             android:configChanges="orientation"
             android:screenOrientation = "portrait">
 
@@ -21,12 +23,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".GameActivity"
+        <activity android:name="org.tektuna.antho.thetaggame.GameActivity"
         android:configChanges="orientation"
         android:screenOrientation = "portrait">
         </activity>
 
-        <activity android:name=".LoseActivity"
+        <activity android:name="org.tektuna.antho.thetaggame.LoseActivity"
         android:configChanges="orientation"
         android:screenOrientation = "portrait">
         </activity>

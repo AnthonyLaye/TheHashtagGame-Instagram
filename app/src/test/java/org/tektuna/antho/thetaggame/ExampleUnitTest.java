@@ -1,4 +1,4 @@
-package com.example.antho.thetaggame;
+package org.tektuna.antho.thetaggame;
 
 import org.junit.Test;
 

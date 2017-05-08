@@ -1,27 +1,18 @@
-package com.example.antho.thetaggame;
+package org.tektuna.antho.thetaggame;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.graphics.Color;
-import android.media.AudioManager;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
-import android.media.ToneGenerator;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -34,9 +25,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.example.antho.thetaggame.R.drawable.button_shape;
-import static com.example.antho.thetaggame.R.drawable.greenbutton_shape;
 
 
 public class GameActivity extends AppCompatActivity {
@@ -61,20 +49,10 @@ public class GameActivity extends AppCompatActivity {
         score = 0;
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544/6300978111");
 
-        /*  ONLY FOR FINISHED APP
+        //  ONLY FOR FINISHED APP
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-        */
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-
-        AdRequest request = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)        // All emulators
-                .addTestDevice("4DE6D475009CE71562EA9B632A64920B")  // An example device ID
-                .build();
-
-
-        mAdView.loadAd(request);
 
         volToggle = (ImageButton) findViewById(R.id.volToggle);
 
@@ -85,6 +63,13 @@ public class GameActivity extends AppCompatActivity {
             volToggle.setBackgroundResource(R.drawable.volon);
         else
             volToggle.setBackgroundResource(R.drawable.voloff);
+
+        button1 = (Button) findViewById(R.id.buttonq1);
+        button2 = (Button) findViewById(R.id.buttonq2);
+        button = (ImageButton) findViewById(R.id.button4);
+        ViewB1 = (TextView) findViewById(R.id.ViewB1);  //To display number of times b1 used
+        ViewB2 = (TextView) findViewById(R.id.ViewB2);
+        scoreKeep = (TextView) findViewById(R.id.textView);
 
         readFiles();
     }
@@ -125,24 +110,17 @@ public class GameActivity extends AppCompatActivity {
 
     public void reLoad() {
 
-        //mySwitch = (Switch) findViewById(R.id.switch1);
-        button1 = (Button) findViewById(R.id.buttonq1);
-        button2 = (Button) findViewById(R.id.buttonq2);
-        button = (ImageButton) findViewById(R.id.button4);
-        ViewB1 = (TextView) findViewById(R.id.ViewB1);  //To display number of times b1 used
-        ViewB2 = (TextView) findViewById(R.id.ViewB2);
-        scoreKeep = (TextView) findViewById(R.id.textView);
-
         button1.setBackgroundResource(R.drawable.button_shape);
         button2.setBackgroundResource(R.drawable.button_shape);
 
+        ImageView myImageView2 = (ImageView) findViewById(R.id.imageView2);
+        ImageView myImageView1 = (ImageView) findViewById(R.id.imageView3);
 
         ViewB1.setText("");
         ViewB2.setText("");
 
         int tagID1, tagID2;
-        ImageView myImageView2 = (ImageView) findViewById(R.id.imageView2);
-        ImageView myImageView1 = (ImageView) findViewById(R.id.imageView3);
+
 
         tagID1 = (int) (Math.random() * tagQuantity);
         tagID2 = (int) (Math.random() * tagQuantity);
@@ -153,6 +131,7 @@ public class GameActivity extends AppCompatActivity {
         button1.setText(hashTags[tagID1]);
         button2.setText(hashTags[tagID2]);
 
+
         myImageView1.setImageResource(getImageId(this, hashPics[tagID1]));
         myImageView2.setImageResource(getImageId(this, hashPics[tagID2]));
 
@@ -162,9 +141,7 @@ public class GameActivity extends AppCompatActivity {
         button2.setClickable(true);
         button.setClickable(true);
         volToggle.setClickable(true);
-        //mySwitch.setClickable(true);
     }
-
 
 
     public static int getImageId(Context context, String imageName) {
@@ -265,10 +242,10 @@ public class GameActivity extends AppCompatActivity {
 
     public void startLoseIntent(int scoreHolder){
 
-        finish();
         Intent myIntent = new Intent(this, LoseActivity.class);
         myIntent.putExtra("Score", scoreHolder);
         startActivity(myIntent);
+        finish();
     }
 
 
@@ -322,6 +299,7 @@ public class GameActivity extends AppCompatActivity {
 
         Intent myIntent = new Intent(this, TitleScreen.class);
         startActivity(myIntent);
+        finish();
     }
 
     public void volToggle(View v){
