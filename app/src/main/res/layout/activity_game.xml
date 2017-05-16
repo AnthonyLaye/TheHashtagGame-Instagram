@@ -89,7 +89,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/app_ID" />
+        ads:adUnitId="@string/app_unit_ID" />
 
 
     <ImageView

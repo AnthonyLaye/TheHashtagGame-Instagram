@@ -9,10 +9,19 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class TitleScreen extends AppCompatActivity {
+import com.google.android.gms.games.Games;
+import com.google.android.gms.games.leaderboard.Leaderboard;
+import com.google.android.gms.games.leaderboard.Leaderboards;
+import com.google.android.gms.games.leaderboard.LeaderboardMetadataResponse;
+import com.google.android.gms.games.leaderboard.LoadPlayerScoreResponse;
+import com.google.android.gms.games.leaderboard.LoadScoresResponse;
+import com.google.android.gms.games.leaderboard.SubmitScoreResponse;
+import com.google.android.gms.games.leaderboard.LeaderboardScore;
+import com.google.android.gms.games.leaderboard.LeaderboardVariant;
+
+public class TitleScreen extends AppCompatActivity{
 
     TextView highScore;
-    ImageView tagGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,4 +47,12 @@ public class TitleScreen extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    public void onLeaderboard(View v){
+
+        startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient,
+                getString(R.string.LEADERBOARD_ID)), 2);
+
+    }
+
 }

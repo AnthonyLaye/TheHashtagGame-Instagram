@@ -47,12 +47,12 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         score = 0;
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544/6300978111");
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-2693589185869684/2783661852");
 
         //  ONLY FOR FINISHED APP
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        //AdView mAdView = (AdView) findViewById(R.id.adView);
+       // AdRequest adRequest = new AdRequest.Builder().build();
+        //mAdView.loadAd(adRequest);
 
         volToggle = (ImageButton) findViewById(R.id.volToggle);
 
@@ -211,7 +211,7 @@ public class GameActivity extends AppCompatActivity {
             public void run() {
                 reLoad();
             }
-        }, 2600);
+        }, 1800);
 
     }
 
@@ -237,7 +237,7 @@ public class GameActivity extends AppCompatActivity {
             public void run() {
                 startLoseIntent(scoreHolder);
             }
-        }, 2600);
+        }, 1800);
     }
 
     public void startLoseIntent(int scoreHolder){

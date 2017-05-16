@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.games.Games;
+
 public class LoseActivity extends AppCompatActivity {
 
     TextView ScoreCtr;
@@ -30,6 +32,7 @@ public class LoseActivity extends AppCompatActivity {
             SharedPreferences.Editor edit = prefs.edit();
             edit.putInt("HighScore", score);
             edit.apply();
+            Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.LEADERBOARD_ID), score);
         }
 
         ScoreCtr = (TextView) findViewById(R.id.ScotreCtr);
