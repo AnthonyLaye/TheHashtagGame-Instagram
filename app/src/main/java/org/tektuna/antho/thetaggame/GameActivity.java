@@ -47,12 +47,6 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         score = 0;
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-2693589185869684/2783661852");
-
-        //  ONLY FOR FINISHED APP
-        //AdView mAdView = (AdView) findViewById(R.id.adView);
-       // AdRequest adRequest = new AdRequest.Builder().build();
-        //mAdView.loadAd(adRequest);
 
         volToggle = (ImageButton) findViewById(R.id.volToggle);
 

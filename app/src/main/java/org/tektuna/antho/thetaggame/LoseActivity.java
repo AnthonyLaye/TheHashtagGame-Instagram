@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
 
 public class LoseActivity extends AppCompatActivity {
 
     TextView ScoreCtr;
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

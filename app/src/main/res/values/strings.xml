@@ -19,10 +19,8 @@
     <string name="volume">Volume</string>
 
     <string name="instructions"> Which Instagram hashtag was used the most?</string>
+    <string name="leaderboard"> Leaderboard</string>
 
     <string name="LEADERBOARD_ID">890890783014 </string>
-
-    <string name="app_ID">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="app_unit_ID">ca-app-pub-2693589185869684/2783661852</string>
 
 </resources>
